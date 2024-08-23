@@ -1,0 +1,102 @@
+body{
+    padding: 0;
+    margin: 0;
+  }
+  
+  .flexbox-container{
+    display: flex;
+    flex-direction: row;
+  }
+
+  #container{
+    background-color:lightgray;
+    height: 100vh;
+    width: 50vw;
+    display: inline-block;
+  }
+
+  canvas{
+    height:100vh;
+    width: 50vw;
+    display: inline-block;
+  }
+  
+  .playground-heading{
+    position: fixed;
+    width: 45vw;
+    top: 0px;
+    right: 10px;
+    pointer-events: none;
+  }
+  
+
+  #card{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    border-radius: 5px;
+    cursor: pointer;
+    position: fixed;
+    left: 10px;
+
+    top: 150px;
+  }
+
+  #bttn{
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    border-radius: 5px;
+    cursor: pointer;
+    position: fixed;
+    top: 270px;
+    left: 10px
+  }
+
+  form{
+    cursor: pointer;
+    position: fixed;
+    top: 730px;
+    left: 10px
+
+  }
+
+
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid green;
+    margin-bottom: 20px;
+
+    cursor: pointer;
+    position: fixed;
+    top: 340px;
+    left: 10px
+}
+
+.circle{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid black;
+
+    cursor: pointer;
+    position: fixed;
+    top: 590px;
+    left: 10px
+
+}
+
+.square {
+    width: 100px;
+    height: 100px;
+    border: 3px solid black;
+
+    cursor: pointer;
+    position: fixed;
+    top: 470px;
+    left: 10px
+}
+
