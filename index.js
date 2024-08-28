@@ -84,6 +84,11 @@ var dictionaryKeys = ['card', 'bttn', 'circle', 'square', 'triangle', 'form'];
 
 console.log()
 
+
+//setting initial value of currElem to null
+
+var currElem = null;
+
 //adding draggable ability for copies of elents 
 
 function addDraggableForCopy(htmlElement){
@@ -96,7 +101,12 @@ function addDraggableForCopy(htmlElement){
 
     function click(e){
 
+        currElem = htmlElement;
+
         console.log('inside the event listener click');
+
+
+        //add function for setting changes. 
 
         //get mouse position
         startX = e.clientX;
@@ -133,6 +143,7 @@ function addDraggableForCopy(htmlElement){
         //if out of playground, delete item
         if((parseInt(htmlElement.style.left) < 455) || (parseInt(rightProperty) < 300)){
             htmlElement.remove();
+            currElem = null;
         }
         
         document.removeEventListener('mousemove', drag);
@@ -167,6 +178,11 @@ function addDraggable(htmlElement, X, Y){
 
         /*to cut */
         copyhtmlElement = htmlElement.cloneNode(true);
+        copyhtmlElement.classList.remove("start-card");
+
+        currElem = copyhtmlElement;
+        
+
         document.querySelector("#container").appendChild(copyhtmlElement);
         copyhtmlElement.style.left = X + 'px';
         copyhtmlElement.style.top = Y + 'px';
@@ -278,6 +294,92 @@ addDraggable(circle, circle_newX, circle_newY);
 addDraggable(square, square_newX, square_newY);
 addDraggable(triangle, tri_newX, tri_newY);
 addDraggable(form, form_newX, form_newY);
+
+
+
+
+//creating event listners for the setting configurations menu. currElem will be the current element clicked
+document.getElementById('top-bttn').addEventListener('click', function(e) {
+    console.log(e);
+
+    var update = document.querySelector("#top-input").value;
+
+    if(currElem === null){
+        
+
+    }
+    else{
+        currElem.style.top = update;
+    }
+    
+});
+
+document.getElementById('right-bttn').addEventListener('click', function(e) {
+
+    var update = document.querySelector("#right-input").value;
+    console.log(update);
+    
+
+    if(currElem === null){
+
+    }
+    else{
+
+        currElem.style.left = "";
+        currElem.style.right = update + "";
+
+        var computed = window.getComputedStyle(currElem);
+        var leftProperty = computed.left;
+        if(parseInt(leftProperty) < 455){
+            currElem.remove();
+            currElem = null;
+        }
+
+        console.log("left property: " + leftProperty);
+        
+    }
+});
+
+document.getElementById('color-bttn').addEventListener('click', function(e) {
+
+    var update = document.querySelector("#color-input").value;
+
+
+    if(currElem === null){
+
+    }
+    else{
+        currElem.style.backgroundColor = update;
+    }
+});
+
+document.getElementById('width-bttn').addEventListener('click', function(e) {
+
+    var update = document.querySelector("#width-input").value;
+
+
+    if(currElem === null){
+
+    }
+    else{
+        currElem.style.width = update;
+    }
+});
+
+document.getElementById('height-bttn').addEventListener('click', function(e) {
+
+    var update = document.querySelector("#height-input").value;
+
+
+    if(currElem === null){
+
+    }
+    else{
+        currElem.style.height = update;
+    }
+});
+
+
 
 
 

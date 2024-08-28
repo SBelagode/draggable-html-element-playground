@@ -34,6 +34,12 @@ change to 340px right when setting is turned on.
     pointer-events: none;
   }
   
+  .start-card{
+    left: 10px;
+
+    top: 150px;
+
+  }
 
   #card{
     width: 100px;
@@ -42,9 +48,7 @@ change to 340px right when setting is turned on.
     border-radius: 5px;
     cursor: pointer;
     position: fixed;
-    left: 10px;
-
-    top: 150px;
+    
   }
 
   #bttn{
@@ -54,15 +58,13 @@ change to 340px right when setting is turned on.
     border-radius: 5px;
     cursor: pointer;
     position: fixed;
-    top: 270px;
-    left: 10px
+    
   }
 
   form{
     cursor: pointer;
     position: fixed;
-    top: 730px;
-    left: 10px
+    
 
   }
 
@@ -77,8 +79,7 @@ change to 340px right when setting is turned on.
 
     cursor: pointer;
     position: fixed;
-    top: 340px;
-    left: 10px
+    
 }
 
 .circle{
@@ -89,8 +90,7 @@ change to 340px right when setting is turned on.
 
     cursor: pointer;
     position: fixed;
-    top: 590px;
-    left: 10px
+    
 
 }
 
@@ -101,8 +101,7 @@ change to 340px right when setting is turned on.
 
     cursor: pointer;
     position: fixed;
-    top: 470px;
-    left: 10px
+    
 }
 
 
@@ -110,5 +109,29 @@ change to 340px right when setting is turned on.
     width: 33vw;
     height: 100vh;
     background-color: lightgray;
+}
+
+
+.element-configurations{
+    width: 250px;
+    height: 370px;
+    padding: 10px;
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.element-configurations input {
+    width: 100%;
+    margin-bottom: 10px;
+    
+}
+
+.element-configurations button {
+    display:block;
+    
 }
 
