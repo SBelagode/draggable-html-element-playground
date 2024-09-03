@@ -82,14 +82,52 @@ var arr = [card, bttn, circle, square, triangle, form];
 var dictionaryKeys = ['card', 'bttn', 'circle', 'square', 'triangle', 'form'];
 
 
-console.log()
 
 
 //setting initial value of currElem to null
 
 var currElem = null;
+var prevElem = null;
 
 //adding draggable ability for copies of elents 
+
+
+
+
+
+
+//this is for displaying the setting screen or not
+
+
+function turnSettingsOn(flash){
+
+    flash = !flash;
+    var settings = document.querySelector(".element-configurations");
+
+    if ((counter > 1) && (flash)) {
+    
+        
+        settings.classList.remove('visible');
+        settings.classList.add('hidden');
+
+        setTimeout(function() {
+            settings.classList.remove('hidden');
+            settings.classList.add('visible');
+        }, 50);  
+
+
+    }
+
+    if (counter == 1){
+        settings.style.display = "block";
+        settings.classList.add('visible');
+
+    }
+    else if(counter == 0){
+        settings.classList.remove('visible');
+        settings.style.display = "none";
+    }
+}
 
 function addDraggableForCopy(htmlElement){
 
@@ -101,9 +139,10 @@ function addDraggableForCopy(htmlElement){
 
     function click(e){
 
+        prevElem = currElem;
+
         currElem = htmlElement;
 
-        console.log('inside the event listener click');
 
 
         //add function for setting changes. 
@@ -119,7 +158,6 @@ function addDraggableForCopy(htmlElement){
 
     function drag(e){
 
-        console.log('inside the event listener drag');
 
         //calculates change in position
         X = startX - e.clientX ;
@@ -136,6 +174,10 @@ function addDraggableForCopy(htmlElement){
 
     function mouseUp(e){
 
+        console.log();
+        console.log("this is the mouseUp event for copied elements");
+        console.log();
+
         
         var computed = window.getComputedStyle(htmlElement);
         var rightProperty = computed.right;
@@ -143,10 +185,18 @@ function addDraggableForCopy(htmlElement){
         //if out of playground, delete item
         if((parseInt(htmlElement.style.left) < 455) || (parseInt(rightProperty) < 300)){
             htmlElement.remove();
+            counter -=1;
+            console.log();
+            console.log("hit the mouseUp event on the copied element");
+            console.log();
             currElem = null;
         }
+
+        //display settings
+        turnSettingsOn(currElem === prevElem);
         
         document.removeEventListener('mousemove', drag);
+        document.removeEventListener('mouseup', mouseUp);
 
         //if the element is not within specified draggable area, then return to original position. 
     }
@@ -180,6 +230,7 @@ function addDraggable(htmlElement, X, Y){
         copyhtmlElement = htmlElement.cloneNode(true);
         copyhtmlElement.classList.remove("start-card");
 
+        prevElem = currElem;
         currElem = copyhtmlElement;
         
 
@@ -187,25 +238,17 @@ function addDraggable(htmlElement, X, Y){
         copyhtmlElement.style.left = X + 'px';
         copyhtmlElement.style.top = Y + 'px';
 
+        counter +=1 ;
+
         for(var i = 0; i< arr.length; i++){
             if(arr[i] === htmlElement){
-                console.log(initialPositions);
-                console.log(initialPositions[dictionaryKeys[i]])
-                console.log(initialPositions[dictionaryKeys[i]][0]);
+                
                 copyhtmlElement.style.left = initialPositions[dictionaryKeys[i]][0] + 'px';
                 copyhtmlElement.style.top = initialPositions[dictionaryKeys[i]][1] + 'px';
                 
             }
             
         }
-
-        console.log(copyhtmlElement.style.top);
-        
-        console.log('done')
-
-
-
-
 
         document.addEventListener('mousemove', drag);
         document.addEventListener('mouseup', mouseUp);
@@ -227,6 +270,10 @@ function addDraggable(htmlElement, X, Y){
     }
 
     function mouseUp(e){
+        console.log();
+
+        console.log("this is the initial mouseup event");
+        console.log();
 
         
         var computed = window.getComputedStyle(copyhtmlElement);
@@ -271,6 +318,7 @@ function addDraggable(htmlElement, X, Y){
             // }
 
             copyhtmlElement.remove();
+            counter -= 1;
 
 
 
@@ -279,7 +327,12 @@ function addDraggable(htmlElement, X, Y){
 
         }
         
+
+        //display settings
+        turnSettingsOn(currElem === prevElem);
+
         document.removeEventListener('mousemove', drag);
+        document.removeEventListener('mouseup', mouseUp);
 
         //if the element is not within specified draggable area, then return to original position. 
     }
@@ -300,7 +353,6 @@ addDraggable(form, form_newX, form_newY);
 
 //creating event listners for the setting configurations menu. currElem will be the current element clicked
 document.getElementById('top-bttn').addEventListener('click', function(e) {
-    console.log(e);
 
     var update = document.querySelector("#top-input").value;
 
@@ -317,7 +369,6 @@ document.getElementById('top-bttn').addEventListener('click', function(e) {
 document.getElementById('right-bttn').addEventListener('click', function(e) {
 
     var update = document.querySelector("#right-input").value;
-    console.log(update);
     
 
     if(currElem === null){
@@ -335,7 +386,6 @@ document.getElementById('right-bttn').addEventListener('click', function(e) {
             currElem = null;
         }
 
-        console.log("left property: " + leftProperty);
         
     }
 });
@@ -378,6 +428,8 @@ document.getElementById('height-bttn').addEventListener('click', function(e) {
         currElem.style.height = update;
     }
 });
+
+
 
 
 

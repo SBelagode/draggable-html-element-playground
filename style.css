@@ -109,6 +109,7 @@ change to 340px right when setting is turned on.
     width: 33vw;
     height: 100vh;
     background-color: lightgray;
+    
 }
 
 
@@ -122,7 +123,42 @@ change to 340px right when setting is turned on.
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+    
+    display: block;
+
+
+
+
+
+
+
+    transition: opacity 0.2s ease-in-out;
+
 }
+
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .element-configurations input {
     width: 100%;
